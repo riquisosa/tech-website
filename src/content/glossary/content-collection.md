@@ -1,7 +1,9 @@
 ---
-term: Testing
-shortdefinition: passed or failed now.
-tags: work
+term: Content Collection
+shortDefinition: Astro's way of organizing and validating your markdown files by type.
+tags:
+  - astro
+draft: false
 ---
 
-So I just write my post here regularly, I guess. And when I want to paste a picture, what do I do?
+Your full explanation goes here as regular markdown body text — this is what actually renders on the detail page.
