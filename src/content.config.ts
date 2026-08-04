@@ -4,7 +4,14 @@ import { glob } from "astro/loaders";
 import config from "@/config";
 
 export const BLOG_PATH = "src/content/posts";
+export const GLOSSARY_PATH = "src/content/glossary";
 
+// ─────────────────────────────────────────────
+// Posts — untouched, exactly as shipped by the
+// theme. Journal entries live here too, folded
+// in by tag (e.g. "journey"), not a separate
+// collection — see project decision log.
+// ─────────────────────────────────────────────
 const posts = defineCollection({
   loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: `./${BLOG_PATH}` }),
   schema: ({ image }) =>
@@ -24,6 +31,10 @@ const posts = defineCollection({
     }),
 });
 
+// ─────────────────────────────────────────────
+// Pages — untouched, exactly as shipped by the
+// theme. Powers /about via src/content/pages/about.md.
+// ─────────────────────────────────────────────
 const pages = defineCollection({
   loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "./src/content/pages" }),
   schema: z.object({
@@ -34,4 +45,22 @@ const pages = defineCollection({
   }),
 });
 
-export const collections = { posts, pages };
+// ─────────────────────────────────────────────
+// Glossary — new. No `pubDatetime` (sorted A→Z,
+// not by date). No `slug` (filename is the URL,
+// same convention as posts). Tags reuse the same
+// field/shape as posts on purpose — this is what
+// lets a term and a post share a tag once the tags
+// pages are updated to check both collections.
+// ─────────────────────────────────────────────
+const glossary = defineCollection({
+  loader: glob({ pattern: "[^_]*.{md,mdx}", base: `./${GLOSSARY_PATH}` }),
+  schema: z.object({
+    term: z.string(),             // display name, e.g. "Content Collection"
+    shortDefinition: z.string(),  // one-line preview — index list + future tooltips only, never the full detail page
+    tags: z.array(z.string()).default(["others"]),
+    draft: z.boolean().optional(),
+  }),
+});
+
+export const collections = { posts, pages, glossary };
