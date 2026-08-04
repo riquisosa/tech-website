@@ -1,55 +1,61 @@
 ---
-import { type CollectionEntry, getCollection, render } from "astro:content";
+import type { GetStaticPaths } from "astro";
+import { getCollection } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import Main from "@/components/Main.astro";
 import Footer from "@/components/Footer.astro";
-import Tag from "@/components/Tag.astro";
-import { slugifyStr } from "@/utils/slugify";
+import Pagination from "@/components/Pagination.astro";
 import { getSortedGlossary } from "@/utils/getSortedGlossary";
+import { getGlossaryUrl } from "@/utils/getGlossaryPaths";
+import { useTranslations } from "@/i18n";
 import config from "@/config";
 
-export async function getStaticPaths() {
+// Glossary paginates on its own page size — deliberately not reusing
+// config.posts.perPage, since that's scoped to posts and short term
+// entries read fine at a higher density than full posts do.
+const GLOSSARY_PAGE_SIZE = 10;
+
+export const getStaticPaths = (async ({ paginate }) => {
   const glossary = await getCollection("glossary", ({ data }) => !data.draft);
-  const sorted = getSortedGlossary(glossary);
+  return paginate(getSortedGlossary(glossary), { pageSize: GLOSSARY_PAGE_SIZE });
+}) satisfies GetStaticPaths;
 
-  return sorted.map(entry => ({
-    params: { slug: entry.id },
-    props: { entry },
-  }));
-}
+const { page } = Astro.props;
 
-type Props = {
-  entry: CollectionEntry<"glossary">;
-};
-
-const { entry } = Astro.props;
-const { term, tags } = entry.data;
-const { Content } = await render(entry);
+const locale = Astro.currentLocale ?? config.site.lang;
+const t = useTranslations(locale);
 ---
 
-<Layout title={`${term} | ${config.site.title}`}>
+<Layout title={`${t.pages.glossaryTitle} | ${config.site.title}`}>
   <Header />
 
-  <main id="main-content" class="app-layout pb-4" data-pagefind-body>
-    <h1 class="text-accent inline-block text-2xl font-bold sm:text-3xl">
-      {term}
-    </h1>
+  <Breadcrumb />
 
-    <article
-      id="article"
-      class:list={[
-        "mt-8 w-full",
-        "app-prose max-w-app",
-        "prose-pre:bg-(--shiki-light-bg) dark:prose-pre:bg-(--shiki-dark-bg)",
-      ]}
-    >
-      <Content />
-    </article>
-
-    <ul class="mt-4 mb-8 flex flex-wrap gap-4 sm:my-8">
-      {tags.map(tag => <Tag tag={slugifyStr(tag)} tagName={tag} size="sm" />)}
+  <Main pageTitle={t.pages.glossaryTitle} pageDesc={t.pages.glossaryDesc}>
+    <ul>
+      {
+        page.data.map(entry => (
+          <li class="my-6">
+            
+              href={getGlossaryUrl(entry.id, locale)}
+              class:list={[
+                "text-accent inline-block text-lg font-medium",
+                "decoration-dashed underline-offset-4 hover:underline",
+                "focus-visible:no-underline focus-visible:underline-offset-0",
+              ]}
+            >
+              {entry.data.term}
+            </a>
+            <p>{entry.data.shortDefinition}</p>
+          </li>
+        ))
+      }
     </ul>
-  </main>
+  </Main>
 
-  <Footer />
+  <Pagination {page} />
+
+  <Footer noMarginTop={page.lastPage > 1} />
 </Layout>
