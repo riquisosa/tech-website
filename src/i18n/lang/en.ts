@@ -8,6 +8,7 @@ export default {
     about: "About",
     archives: "Archives",
     search: "Search",
+    glossary: "Glossary",
   },
   post: {
     publishedAt: "Published at",
@@ -52,6 +53,9 @@ export default {
 
     searchTitle: "Search",
     searchDesc: "Search any article ...",
+
+    glossaryTitle: "Glossary",
+    glossaryDesc: "Terms I've explained so you don't have to Google them.",
   },
   a11y: {
     skipToContent: "Skip to content",
