@@ -1,1 +1,61 @@
-v
+---
+import type { GetStaticPaths } from "astro";
+import { getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import Main from "@/components/Main.astro";
+import Footer from "@/components/Footer.astro";
+import Pagination from "@/components/Pagination.astro";
+import { getSortedGlossary } from "@/utils/getSortedGlossary";
+import { getGlossaryUrl } from "@/utils/getGlossaryPaths";
+import { useTranslations } from "@/i18n";
+import config from "@/config";
+
+// Glossary paginates on its own page size — deliberately not reusing
+// config.posts.perPage, since that's scoped to posts and short term
+// entries read fine at a higher density than full posts do.
+const GLOSSARY_PAGE_SIZE = 10;
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const glossary = await getCollection("glossary", ({ data }) => !data.draft);
+  return paginate(getSortedGlossary(glossary), { pageSize: GLOSSARY_PAGE_SIZE });
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props;
+
+const locale = Astro.currentLocale ?? config.site.lang;
+const t = useTranslations(locale);
+---
+
+<Layout title={`${t.pages.glossaryTitle} | ${config.site.title}`}>
+  <Header />
+
+  <Breadcrumb />
+
+  <Main pageTitle={t.pages.glossaryTitle} pageDesc={t.pages.glossaryDesc}>
+    <ul>
+      {
+        page.data.map(entry => (
+          <li class="my-6">
+            <a
+              href={getGlossaryUrl(entry.id, locale)}
+              class:list={[
+                "text-accent inline-block text-lg font-medium",
+                "decoration-dashed underline-offset-4 hover:underline",
+                "focus-visible:no-underline focus-visible:underline-offset-0",
+              ]}
+            >
+              {entry.data.term}
+            </a>
+            <p>{entry.data.shortDefinition}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </Main>
+
+  <Pagination {page} />
+
+  <Footer noMarginTop={page.lastPage > 1} />
+</Layout>
