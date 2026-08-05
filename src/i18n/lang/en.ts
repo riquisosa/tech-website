@@ -56,6 +56,7 @@ export default {
 
     glossaryTitle: "Glossary",
     glossaryDesc: "Terms I've explained so you don't have to Google them.",
+    glossaryMentionedIn: "Mentioned in",
   },
   a11y: {
     skipToContent: "Skip to content",
