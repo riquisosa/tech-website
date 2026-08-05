@@ -60,13 +60,12 @@ export default defineConfig({
   },
   fonts: [
     {
-      name: "Google Sans Code",
-      cssVariable: "--font-google-sans-code",
-      provider: fontProviders.google(),
+      name: "iA Writer Duo",
+      cssVariable: "--font-ia-writer-duo",
+      provider: fontProviders.fontsource(),
       fallbacks: ["monospace"],
-      weights: [300, 400, 500, 600, 700],
+      weights: [400, 700],
       styles: ["normal", "italic"],
-      formats: ["woff", "ttf"],
     },
   ],
   env: {
