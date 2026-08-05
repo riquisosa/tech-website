@@ -6,7 +6,7 @@ export interface UIStrings {
     about: string;
     archives: string;
     search: string;
-    glossary: string; 
+    glossary: string;
   };
   post: {
     publishedAt: string;
@@ -53,7 +53,7 @@ export interface UIStrings {
     searchDesc: string;
 
     glossaryTitle: string;
-    glossaryDesc: string; 
+    glossaryDesc: string;
   };
   a11y: {
     skipToContent: string;
