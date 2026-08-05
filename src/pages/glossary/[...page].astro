@@ -12,9 +12,6 @@ import { getGlossaryUrl } from "@/utils/getGlossaryPaths";
 import { useTranslations } from "@/i18n";
 import config from "@/config";
 
-// Glossary paginates on its own page size — deliberately not reusing
-// config.posts.perPage, since that's scoped to posts and short term
-// entries read fine at a higher density than full posts do.
 const GLOSSARY_PAGE_SIZE = 10;
 
 export const getStaticPaths = (async ({ paginate }) => {
@@ -38,7 +35,7 @@ const t = useTranslations(locale);
       {
         page.data.map(entry => (
           <li class="my-6">
-            
+            <a
               href={getGlossaryUrl(entry.id, locale)}
               class:list={[
                 "text-accent inline-block text-lg font-medium",
