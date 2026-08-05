@@ -12,9 +12,8 @@ import { getGlossaryUrl } from "@/utils/getGlossaryPaths";
 import { useTranslations } from "@/i18n";
 import config from "@/config";
 
-const GLOSSARY_PAGE_SIZE = 10;
-
 export const getStaticPaths = (async ({ paginate }) => {
+  const GLOSSARY_PAGE_SIZE = 10;
   const glossary = await getCollection("glossary", ({ data }) => !data.draft);
   return paginate(getSortedGlossary(glossary), { pageSize: GLOSSARY_PAGE_SIZE });
 }) satisfies GetStaticPaths;
