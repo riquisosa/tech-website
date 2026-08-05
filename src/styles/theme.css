@@ -10,25 +10,25 @@
   --font-app: var(--font-ia-writer-duo);
 }
 
-/* Light theme values */
+/* Light theme values — Flexoki, verified against stephango.com/flexoki */
 :root,
 [data-theme="light"] {
-  --background: #fdfdfd;
-  --foreground: #282728;
-  --accent: #006cac;
-  --accent-foreground: #ffffff;
-  --muted: #e6e6e6;
-  --muted-foreground: #6b7280;
-  --border: #ece9e9;
+  --background: #fffcf0; /* paper */
+  --foreground: #100f0f; /* black */
+  --accent: #24837b; /* cyan-600 — light themes use 600 per spec */
+  --accent-foreground: #fffcf0; /* paper — not Flexoki-defined; chosen for contrast on cyan-600 */
+  --muted: #f2f0e5; /* base-50 */
+  --muted-foreground: #6f6e69; /* base-600 */
+  --border: #e6e4d9; /* base-100 */
 }
 
-/* Dark theme values */
+/* Dark theme values — Flexoki, verified against stephango.com/flexoki */
 [data-theme="dark"] {
-  --background: #212737;
-  --foreground: #eaedf3;
-  --accent: #ff6b01;
-  --accent-foreground: #ffffff;
-  --muted: #343f60;
-  --muted-foreground: #afb9ca;
-  --border: #ab4b08;
+  --background: #100f0f; /* black */
+  --foreground: #cecdc3; /* base-200 */
+  --accent: #3aa99f; /* cyan-400 — dark themes use 400 per spec */
+  --accent-foreground: #100f0f; /* black — not Flexoki-defined; chosen for contrast on cyan-400 */
+  --muted: #1c1b1a; /* base-950 */
+  --muted-foreground: #878580; /* base-500 */
+  --border: #282726; /* base-900 */
 }
