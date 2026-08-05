@@ -48,15 +48,17 @@ const pages = defineCollection({
 // ─────────────────────────────────────────────
 // Glossary — new. No `pubDatetime` (sorted A→Z,
 // not by date). No `slug` (filename is the URL,
-// same convention as posts). Tags reuse the same
-// field/shape as posts on purpose.
+// same convention as posts). No `tags` — a term
+// is connected to posts by the POST including the
+// term's own id/slug in its own tags list, not by
+// the glossary entry tagging itself. See the
+// "referenced in" lookup on the detail page.
 // ─────────────────────────────────────────────
 const glossary = defineCollection({
   loader: glob({ pattern: "[^_]*.{md,mdx}", base: `./${GLOSSARY_PATH}` }),
   schema: z.object({
     term: z.string(),
     shortDefinition: z.string(),
-    tags: z.array(z.string()).default(["others"]),
     draft: z.boolean().optional(),
   }),
 });
