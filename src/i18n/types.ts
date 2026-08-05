@@ -54,6 +54,7 @@ export interface UIStrings {
 
     glossaryTitle: string;
     glossaryDesc: string;
+    glossaryMentionedIn: string;
   };
   a11y: {
     skipToContent: string;
