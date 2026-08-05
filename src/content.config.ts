@@ -49,15 +49,13 @@ const pages = defineCollection({
 // Glossary — new. No `pubDatetime` (sorted A→Z,
 // not by date). No `slug` (filename is the URL,
 // same convention as posts). Tags reuse the same
-// field/shape as posts on purpose — this is what
-// lets a term and a post share a tag once the tags
-// pages are updated to check both collections.
+// field/shape as posts on purpose.
 // ─────────────────────────────────────────────
 const glossary = defineCollection({
   loader: glob({ pattern: "[^_]*.{md,mdx}", base: `./${GLOSSARY_PATH}` }),
   schema: z.object({
-    term: z.string(),             // display name, e.g. "Content Collection"
-    shortDefinition: z.string(),  // one-line preview — index list + future tooltips only, never the full detail page
+    term: z.string(),
+    shortDefinition: z.string(),
     tags: z.array(z.string()).default(["others"]),
     draft: z.boolean().optional(),
   }),
