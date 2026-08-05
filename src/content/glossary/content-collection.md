@@ -6,4 +6,4 @@ tags:
 draft: false
 ---
 
-Your full explanation goes here as regular markdown body text — this is what actually renders on the detail page.
+A content collection is how Astro groups related markdown files together and checks that each one has the fields it's supposed to have before the site builds. Posts, glossary terms, and pages are all separate collections in this project, each with its own required fields defined in `content.config.ts`.
