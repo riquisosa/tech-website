@@ -41,6 +41,29 @@ function setRandomLinkColors(): void {
   document.querySelectorAll<HTMLAnchorElement>("a").forEach(el => {
     el.style.textDecorationColor = getRandomColor();
   });
+
+  // Tag pills fake their underline with a dashed border-bottom instead of
+  // real text-decoration, so setting textDecorationColor above does
+  // nothing visible for them — they need their border colored directly.
+  document.querySelectorAll<HTMLElement>(".tag-pill").forEach(el => {
+    el.style.borderBottomColor = getRandomColor();
+  });
+
+  // The wavy "currently active" indicator under Archives/Search is a
+  // decorative SVG icon, not real text, so text-decoration-color can't
+  // touch it either — style its shapes directly. Covers whichever shape
+  // elements the icon actually uses, and also sets color in case any
+  // path relies on fill="currentColor" rather than an explicit fill.
+  document.querySelectorAll<HTMLElement>(".nav-underline-icon").forEach(el => {
+    const color = getRandomColor();
+    el.style.color = color;
+    el
+      .querySelectorAll<SVGElement>("path, circle, rect, line, polyline, ellipse")
+      .forEach(shape => {
+        shape.style.fill = color;
+        shape.style.stroke = color;
+      });
+  });
 }
 
 function attachHoverListeners(): void {
