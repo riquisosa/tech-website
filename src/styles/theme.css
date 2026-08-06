@@ -7,7 +7,7 @@
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
-  --font-app: var(--font-ia-writer-duo);
+  --font-app: var(--font-martian-grotesk);
 }
 
 /* Light theme values — Flexoki, verified against stephango.com/flexoki */
@@ -15,8 +15,8 @@
 [data-theme="light"] {
   --background: #fffcf0; /* paper */
   --foreground: #100f0f; /* black */
-  --accent: #24837b; /* cyan-600 — light themes use 600 per spec */
-  --accent-foreground: #fffcf0; /* paper — not Flexoki-defined; chosen for contrast on cyan-600 */
+  --accent: #5e409d; /* purple-600 — light themes use 600 per spec */
+  --accent-foreground: #fffcf0; /* paper — not Flexoki-defined; chosen for contrast on purple-600 */
   --muted: #f2f0e5; /* base-50 */
   --muted-foreground: #6f6e69; /* base-600 */
   --border: #e6e4d9; /* base-100 */
@@ -26,8 +26,8 @@
 [data-theme="dark"] {
   --background: #100f0f; /* black */
   --foreground: #cecdc3; /* base-200 */
-  --accent: #3aa99f; /* cyan-400 — dark themes use 400 per spec */
-  --accent-foreground: #100f0f; /* black — not Flexoki-defined; chosen for contrast on cyan-400 */
+  --accent: #8b7ec8; /* purple-400 — dark themes use 400 per spec */
+  --accent-foreground: #100f0f; /* black — not Flexoki-defined; chosen for contrast on purple-400 */
   --muted: #1c1b1a; /* base-950 */
   --muted-foreground: #878580; /* base-500 */
   --border: #282726; /* base-900 */
