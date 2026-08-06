@@ -15,8 +15,8 @@
 [data-theme="light"] {
   --background: #fffcf0; /* paper */
   --foreground: #100f0f; /* black */
-  --accent: #5e409d; /* purple-600 — light themes use 600 per spec */
-  --accent-foreground: #fffcf0; /* paper — not Flexoki-defined; chosen for contrast on purple-600 */
+  --accent: #a02f6f; /* magenta-600 — light themes use 600 per spec */
+  --accent-foreground: #fffcf0; /* paper — not Flexoki-defined; chosen for contrast on magenta-600 */
   --muted: #f2f0e5; /* base-50 */
   --muted-foreground: #6f6e69; /* base-600 */
   --border: #e6e4d9; /* base-100 */
@@ -26,9 +26,9 @@
 [data-theme="dark"] {
   --background: #100f0f; /* black */
   --foreground: #cecdc3; /* base-200 */
-  --accent: #8b7ec8; /* purple-400 — dark themes use 400 per spec */
-  --accent-foreground: #100f0f; /* black — not Flexoki-defined; chosen for contrast on purple-400 */
+  --accent: #ce5d97; /* magenta-400 — dark themes use 400 per spec */
+  --accent-foreground: #100f0f; /* black — not Flexoki-defined; chosen for contrast on magenta-400 */
   --muted: #1c1b1a; /* base-950 */
   --muted-foreground: #878580; /* base-500 */
-  --border: #282726; /* base-900 */
+  --border: #4f1b39; /* magenta-850, Flexoki extended palette — deliberate deviation from the strict 400/600 pair, so the border echoes the accent hue in dark mode like the original theme did */
 }
