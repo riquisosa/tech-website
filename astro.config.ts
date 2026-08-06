@@ -66,6 +66,7 @@ export default defineConfig({
       fallbacks: ["monospace"],
       weights: [400, 700],
       styles: ["normal", "italic"],
+      formats: ["woff2", "ttf"],
     },
   ],
   env: {
