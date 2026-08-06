@@ -60,13 +60,46 @@ export default defineConfig({
   },
   fonts: [
     {
-      name: "iA Writer Duo",
-      cssVariable: "--font-ia-writer-duo",
-      provider: fontProviders.fontsource(),
-      fallbacks: ["monospace"],
-      weights: [400, 700],
-      styles: ["normal", "italic"],
-      formats: ["woff2", "ttf"],
+      provider: fontProviders.local(),
+      name: "Martian Grotesk",
+      cssVariable: "--font-martian-grotesk",
+      fallbacks: ["sans-serif"],
+      options: {
+        variants: [
+          {
+            src: [
+              "./src/assets/fonts/MartianGrotesk-StdLt.woff2",
+              "./src/assets/fonts/MartianGrotesk-StdLt.ttf",
+            ],
+            weight: 300,
+            style: "normal",
+          },
+          {
+            src: [
+              "./src/assets/fonts/MartianGrotesk-StdRg.woff2",
+              "./src/assets/fonts/MartianGrotesk-StdRg.ttf",
+            ],
+            weight: 400,
+            style: "normal",
+          },
+          {
+            src: [
+              "./src/assets/fonts/MartianGrotesk-StdMd.woff2",
+              "./src/assets/fonts/MartianGrotesk-StdMd.ttf",
+            ],
+            weight: 500,
+            style: "normal",
+          },
+          {
+            src: [
+              "./src/assets/fonts/MartianGrotesk-StdBd.woff2",
+              "./src/assets/fonts/MartianGrotesk-StdBd.ttf",
+            ],
+            weight: 700,
+            style: "normal",
+          },
+        ],
+      },
     },
   ],
   env: {
